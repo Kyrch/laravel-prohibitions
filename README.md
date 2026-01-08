@@ -1,4 +1,4 @@
-# Restrict your models 
+# Prohibit your models 
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/kyrch/laravel-prohibitions.svg?style=flat-square)](https://packagist.org/packages/kyrch/laravel-prohibitions)
 [![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/kyrch/laravel-prohibitions/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/kyrch/laravel-prohibitions/actions?query=workflow%3Arun-tests+branch%3Amain)
