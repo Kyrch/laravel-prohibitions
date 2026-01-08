@@ -2,34 +2,39 @@
 
 declare(strict_types=1);
 
+use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 use Illuminate\Support\Facades\Facade;
 
 arch()
-    ->expect('App')
+    ->expect('src')
     ->toUseStrictTypes()
     ->not->toUse(['die', 'dd', 'dump', 'var_dump']);
 
 arch()
-    ->expect('App\Contracts')
+    ->expect('src\Console\Commands')
+    ->toExtend(Command::class);
+
+arch()
+    ->expect('src\Contracts')
     ->toBeInterfaces();
 
 arch()
-    ->expect('App\Facades')
+    ->expect('src\Facades')
     ->toBeClasses()
     ->toExtend(Facade::class);
 
 arch()
-    ->expect('App\Models')
+    ->expect('src\Models')
     ->toBeClasses()
     ->toExtend(Model::class);
 
 arch()
-    ->expect('App\Pivots')
+    ->expect('src\Pivots')
     ->toBeClasses()
     ->toExtend(Pivot::class);
 
 arch()
-    ->expect('App\Traits')
+    ->expect('src\Traits')
     ->toBeTraits();
