@@ -9,12 +9,6 @@ use Kyrch\Prohibition\Pivots\ModelProhibition;
 use Kyrch\Prohibition\Pivots\ModelSanction;
 
 return [
-    'cache' => [
-        'enabled' => true,
-        'key' => 'kyrch.prohibition.cache',
-        'ttl' => DateInterval::createFromDateString('24 hours'),
-    ],
-
     'events_enabled' => true,
 
     'models' => [
