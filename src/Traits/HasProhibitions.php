@@ -67,8 +67,7 @@ trait HasProhibitions
     public function isDirectlyProhibitedFrom(string $ability): bool
     {
         $prohibition = $this->loadMissing('prohibitions')->prohibitions
-            ->where('name', $ability)
-            ->first();
+            ->firstWhere('name', $ability);
 
         return $prohibition
             ? $this->checkExpiration($prohibition)
@@ -78,7 +77,7 @@ trait HasProhibitions
     public function isProhibitedViaSanction(string $ability): bool
     {
         return $this->hasSanctionNotExpired(
-            config('prohibition.models.prohibition')::query()->firstWhere('name', $ability)?->sanctions
+            $this->loadMissing('sanctions')->sanctions->filter(fn (Sanction $sanction) => $sanction->prohibitions->firstWhere('name', $ability))
         );
     }
 

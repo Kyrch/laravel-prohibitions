@@ -18,12 +18,16 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->timestamps();
+
+            $table->unique('name');
         });
 
         Schema::create($tableNames['sanction'], function (Blueprint $table): void {
             $table->id();
             $table->string('name');
             $table->timestamps();
+
+            $table->unique('name');
         });
 
         Schema::create($tableNames['sanction_prohibition'], function (Blueprint $table) use ($tableNames): void {

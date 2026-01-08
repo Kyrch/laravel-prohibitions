@@ -2,15 +2,23 @@
 
 declare(strict_types=1);
 
+use Illuminate\Foundation\Auth\User;
 use Kyrch\Prohibition\Models\Prohibition;
 use Kyrch\Prohibition\Models\Sanction;
 use Kyrch\Prohibition\Pivots\ModelProhibition;
 use Kyrch\Prohibition\Pivots\ModelSanction;
 
 return [
+    'cache' => [
+        'enabled' => true,
+        'key' => 'kyrch.prohibition.cache',
+        'ttl' => DateInterval::createFromDateString('24 hours'),
+    ],
+
     'events_enabled' => true,
 
     'models' => [
+        'user' => User::class,
         'prohibition' => Prohibition::class,
         'sanction' => Sanction::class,
         'model_prohibition' => ModelProhibition::class,

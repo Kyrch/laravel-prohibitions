@@ -6,6 +6,8 @@ namespace Kyrch\Prohibition\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Config;
 
 /**
@@ -48,6 +50,21 @@ class Sanction extends Model
         return $this->belongsToMany(
             $prohibition,
             Config::string('prohibition.table_names.sanction_prohibition'),
+        );
+    }
+
+    /**
+     * @return MorphToMany<User, $this>
+     */
+    public function users(): MorphToMany
+    {
+        /** @var class-string<User> $user */
+        $user = Config::string('prohibitions.models.user');
+
+        return $this->morphedByMany(
+            $user,
+            'model',
+            Config::string('prohibition.table_names.model_sanctions'),
         );
     }
 }

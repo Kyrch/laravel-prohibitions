@@ -4,13 +4,17 @@ declare(strict_types=1);
 
 namespace Kyrch\Prohibition\Models;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Config;
 
 /**
  * @property-read int $id
  * @property-read string $name
+ * @property-read Collection<int, Sanction> $sanctions
  */
 class Prohibition extends Model
 {
@@ -48,6 +52,21 @@ class Prohibition extends Model
         return $this->belongsToMany(
             $sanction,
             Config::string('prohibition.table_names.sanction_prohibition'),
+        );
+    }
+
+    /**
+     * @return MorphToMany<User, $this>
+     */
+    public function users(): MorphToMany
+    {
+        /** @var class-string<User> $user */
+        $user = Config::string('prohibitions.models.user');
+
+        return $this->morphedByMany(
+            $user,
+            'model',
+            Config::string('prohibition.table_names.model_prohibitions'),
         );
     }
 }
