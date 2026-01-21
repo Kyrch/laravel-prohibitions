@@ -55,7 +55,7 @@ trait HasProhibitions
         ]);
 
         if (Config::boolean('prohibition.events_enabled')) {
-            event(new ModelProhibitionTriggered($this->getModel(), $prohibition));
+            event(new ModelProhibitionTriggered($this->getModel(), $prohibition, $expiresAt, $reason, $moderator));
         }
     }
 

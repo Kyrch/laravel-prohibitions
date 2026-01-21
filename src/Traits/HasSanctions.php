@@ -56,7 +56,7 @@ trait HasSanctions
         ]);
 
         if (config('prohibition.events_enabled')) {
-            event(new ModelSanctionTriggered($this->getModel(), $sanction));
+            event(new ModelSanctionTriggered($this->getModel(), $sanction, $expiresAt, $reason, $moderator));
         }
     }
 

@@ -15,7 +15,13 @@ class ModelSanctionTriggered
     use SerializesModels;
 
     /**
-     * @param  Sanction|string  $sanction
+     * @param  Sanction  $sanction
      */
-    public function __construct(public Model $model, public mixed $sanction) {}
+    public function __construct(
+        public Model $model,
+        public mixed $sanction,
+        public ?\DateTimeInterface $expiresAt = null,
+        public ?string $reason = null,
+        public ?Model $moderator = null,
+    ) {}
 }

@@ -15,7 +15,13 @@ class ModelProhibitionTriggered
     use SerializesModels;
 
     /**
-     * @param  Prohibition|string  $prohibition
+     * @param  Prohibition  $prohibition
      */
-    public function __construct(public Model $model, public mixed $prohibition) {}
+    public function __construct(
+        public Model $model,
+        public mixed $prohibition,
+        public ?\DateTimeInterface $expiresAt = null,
+        public ?string $reason = null,
+        public ?Model $moderator = null
+    ) {}
 }
