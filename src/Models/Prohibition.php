@@ -61,7 +61,7 @@ class Prohibition extends Model
     public function users(): MorphToMany
     {
         /** @var class-string<User> $user */
-        $user = Config::string('prohibitions.models.user');
+        $user = Config::string('prohibition.models.user');
 
         return $this->morphedByMany(
             $user,
