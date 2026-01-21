@@ -21,17 +21,16 @@ You can install the package via composer:
 composer require kyrch/laravel-prohibitions
 ```
 
-You can publish and run the migrations with:
-
-```bash
-php artisan vendor:publish --tag="laravel-prohibitions-migrations"
-php artisan migrate
-```
-
 You can publish the config file with:
 
 ```bash
 php artisan vendor:publish --tag="laravel-prohibitions-config"
+```
+
+You can publish and run the migrations with:
+
+```bash
+php artisan vendor:publish --tag="laravel-prohibitions-migrations"
 ```
 
 ### Usage
