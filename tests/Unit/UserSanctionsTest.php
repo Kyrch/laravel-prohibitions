@@ -52,6 +52,24 @@ test('expires_at null means permanent sanction', function (): void {
     expect($this->testUser->hasSanctionNotExpired('sanction'))->toBeTrue();
 });
 
+test('expired scope', function (): void {
+    $this->testUser->applySanction('sanction', Date::now()->addDays(fake()->numberBetween(1, 10)));
+
+    expect(Sanction::query()->expired()->get()->isEmpty())->toBeTrue();
+});
+
+test('notExpired scope', function (): void {
+    $this->testUser->applySanction('sanction', Date::now()->addDays(fake()->numberBetween(1, 10)));
+
+    expect(Sanction::query()->notExpired()->get()->isEmpty())->toBeFalse();
+});
+
+test('notExpired scope when expires_at is null', function (): void {
+    $this->testUser->applySanction('sanction', null);
+
+    expect(Sanction::query()->notExpired()->get()->isEmpty())->toBeFalse();
+});
+
 test('dispatches model prohibition triggered', function (): void {
     $this->testUser->applySanction('sanction');
 
