@@ -21,19 +21,19 @@
         "illuminate/contracts": "^12.0||^13.0"
     },
     "require-dev": {
-        "driftingly/rector-laravel": "^2.1.8",
-        "larastan/larastan": "^3.8.1",
-        "laravel/pint": "^1.26",
+        "driftingly/rector-laravel": "^2.1.12",
+        "larastan/larastan": "^3.9.3",
+        "laravel/pint": "^1.29",
         "mrpunyapal/rector-pest": "^0.2.3",
-        "nunomaduro/collision": "^8.8.3",
+        "nunomaduro/collision": "^8.9.1",
         "orchestra/testbench": "^11.0.0||^10.8.0",
-        "pestphp/pest": "^4.2",
+        "pestphp/pest": "^4.4.2",
         "pestphp/pest-plugin-arch": "^4.0",
-        "pestphp/pest-plugin-laravel": "^4.0",
+        "pestphp/pest-plugin-laravel": "^4.1",
         "phpstan/extension-installer": "^1.4.3",
-        "phpstan/phpstan-deprecation-rules": "^2.0.3",
-        "phpstan/phpstan-phpunit": "^2.0.10",
-        "rector/rector": "^2.2.14"
+        "phpstan/phpstan-deprecation-rules": "^2.0.4",
+        "phpstan/phpstan-phpunit": "^2.0.16",
+        "rector/rector": "^2.3.9"
     },
     "autoload": {
         "psr-4": {
@@ -54,7 +54,7 @@
         "post-autoload-dump": "@composer run prepare",
         "prepare": "@php vendor/bin/testbench package:discover --ansi",
         "post-update-cmd": [
-            "composer bump"
+            "composer bump --dev-only"
         ],
         "lint": [
             "rector",
