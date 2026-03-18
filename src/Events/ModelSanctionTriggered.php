@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Kyrch\Prohibition\Events;
 
+use DateTimeInterface;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
@@ -20,7 +21,7 @@ class ModelSanctionTriggered
     public function __construct(
         public Model $model,
         public mixed $sanction,
-        public ?\DateTimeInterface $expiresAt = null,
+        public ?DateTimeInterface $expiresAt = null,
         public ?string $reason = null,
         public ?Model $moderator = null,
     ) {}

@@ -54,6 +54,24 @@ test('expires_at null means permanent prohibition', function (): void {
     expect($this->testUser->isProhibitedFrom('prohibition'))->toBeTrue();
 });
 
+test('expired scope', function (): void {
+    $this->testUser->prohibit('prohibition', Date::now()->addDays(fake()->numberBetween(1, 10)));
+
+    expect(Prohibition::query()->expired()->get()->isEmpty())->toBeTrue();
+});
+
+test('notExpired scope', function (): void {
+    $this->testUser->prohibit('prohibition', Date::now()->addDays(fake()->numberBetween(1, 10)));
+
+    expect(Prohibition::query()->notExpired()->get()->isEmpty())->toBeFalse();
+});
+
+test('notExpired scope when expires_at is null', function (): void {
+    $this->testUser->prohibit('prohibition', null);
+
+    expect(Prohibition::query()->notExpired()->get()->isEmpty())->toBeFalse();
+});
+
 test('dispatches model prohibition triggered', function (): void {
     $this->testUser->prohibit('prohibition');
 

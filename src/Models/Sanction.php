@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Kyrch\Prohibition\Models;
 
+use Illuminate\Database\Eloquent\Attributes\Scope;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
@@ -37,6 +39,35 @@ class Sanction extends Model
         return static::query()->firstOrCreate([
             'name' => $name,
         ]);
+    }
+
+    /**
+     * @param  Builder<$this>  $query
+     * @return Builder<$this>
+     */
+    #[Scope]
+    protected function expired(Builder $query): Builder
+    {
+        $pivotTable = Config::string('prohibition.table_names.model_sanctions');
+
+        return $query
+            ->join($pivotTable, $this->getQualifiedKeyName(), '=', $this->prohibitions()->getQualifiedParentKeyName())
+            ->where("$pivotTable.expires_at", '<', now());
+    }
+
+    /**
+     * @param  Builder<$this>  $query
+     * @return Builder<$this>
+     */
+    #[Scope]
+    protected function notExpired(Builder $query): Builder
+    {
+        $pivotTable = Config::string('prohibition.table_names.model_sanctions');
+
+        return $query
+            ->join($pivotTable, $this->getQualifiedKeyName(), '=', $this->prohibitions()->getQualifiedParentKeyName())
+            ->where("$pivotTable.expires_at", '>', now())
+            ->orWhereNull("$pivotTable.expires_at");
     }
 
     /**
